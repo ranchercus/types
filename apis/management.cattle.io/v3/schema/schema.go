@@ -47,7 +47,8 @@ var (
 		Init(mgmtSecretTypes).
 		Init(clusterTemplateTypes).
 		Init(driverMetadataTypes).
-		Init(encryptionTypes)
+		Init(encryptionTypes).
+		Init(clusterSettingTypes)
 
 	TokenSchemas = factory.Schemas(&Version).
 			Init(tokens)
@@ -915,4 +916,8 @@ func encryptionTypes(schemas *types.Schemas) *types.Schemas {
 		}{}).MustImport(&Version, apiserverconfig.KMSConfiguration{}, struct {
 		Timeout string
 	}{})
+}
+
+func clusterSettingTypes(schemas *types.Schemas) *types.Schemas {
+	return schemas.MustImport(&Version, v3.ClusterSetting{})
 }

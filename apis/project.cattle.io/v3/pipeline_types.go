@@ -262,13 +262,21 @@ type RunScriptConfig struct {
 }
 
 type PublishImageConfig struct {
-	DockerfilePath       string `json:"dockerfilePath,omittempty" yaml:"dockerfilePath,omitempty" norman:"required,default=./Dockerfile"`
-	BuildContext         string `json:"buildContext,omitempty" yaml:"buildContext,omitempty" norman:"required,default=."`
-	Tag                  string `json:"tag,omitempty" yaml:"tag,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
-	PushRemote           bool   `json:"pushRemote,omitempty" yaml:"pushRemote,omitempty"`
-	Registry             string `json:"registry,omitempty" yaml:"registry,omitempty"`
+	DockerfilePath string `json:"dockerfilePath,omittempty" yaml:"dockerfilePath,omitempty" norman:"required,default=./Dockerfile"`
+	BuildContext   string `json:"buildContext,omitempty" yaml:"buildContext,omitempty" norman:"required,default=."`
+	Tag            string `json:"tag,omitempty" yaml:"tag,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
+	PushRemote     bool   `json:"pushRemote,omitempty" yaml:"pushRemote,omitempty"`
+	Registry       string `json:"registry,omitempty" yaml:"registry,omitempty"`
+	//Author: Zac +
 	CallbackScript       string `json:"callbackScript,omitempty" yaml:"callbackScript,omitempty"`
 	CallbackScriptParams string `json:"callbackScriptParams,omitempty" yaml:"callbackScriptParams,omitempty"`
+	Deploy               bool   `json:"deploy,omitempty" yaml:"deploy,omitempty"`
+	TargetNamespace      string `json:"targetNamespace,omitempty" yaml:"targetNamespace,omitempty"`
+	WorkloadId           string `json:"workloadId,omitempty" yaml:"workloadId,omitempty"`
+	Port                 string `json:"port,omitempty" yaml:"port,omitempty"`
+	ContainerIndex       int32  `json:"containerIndex,omitempty" yaml:"containerIndex,omitempty"`
+	DeployService        bool   `json:"deployService,omitempty" yaml:"deployService,omitempty"`
+	//Author: Zac -
 }
 
 type ApplyYamlConfig struct {
@@ -298,23 +306,25 @@ type ApplyAppConfig struct {
 type PipelineExecutionSpec struct {
 	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
 
-	PipelineName      string         `json:"pipelineName" norman:"required,type=reference[pipeline]"`
-	PipelineConfig    PipelineConfig `json:"pipelineConfig,omitempty" norman:"required"`
-	RepositoryURL     string         `json:"repositoryUrl,omitempty"`
-	Run               int            `json:"run,omitempty" norman:"required,min=1"`
-	TriggeredBy       string         `json:"triggeredBy,omitempty" norman:"required,options=user|cron|webhook"`
-	TriggerUserName   string         `json:"triggerUserName,omitempty" norman:"type=reference[user]"`
-	Commit            string         `json:"commit,omitempty"`
-	Event             string         `json:"event,omitempty"`
-	Branch            string         `json:"branch,omitempty"`
-	Ref               string         `json:"ref,omitempty"`
-	HTMLLink          string         `json:"htmlLink,omitempty"`
-	Title             string         `json:"title,omitempty"`
-	Message           string         `json:"message,omitempty"`
-	Author            string         `json:"author,omitempty"`
-	AvatarURL         string         `json:"avatarUrl,omitempty"`
-	Email             string         `json:"email,omitempty"`
-	RunCallbackScript bool           `json:"runCallbackScript,omitempty"`
+	PipelineName    string         `json:"pipelineName" norman:"required,type=reference[pipeline]"`
+	PipelineConfig  PipelineConfig `json:"pipelineConfig,omitempty" norman:"required"`
+	RepositoryURL   string         `json:"repositoryUrl,omitempty"`
+	Run             int            `json:"run,omitempty" norman:"required,min=1"`
+	TriggeredBy     string         `json:"triggeredBy,omitempty" norman:"required,options=user|cron|webhook"`
+	TriggerUserName string         `json:"triggerUserName,omitempty" norman:"type=reference[user]"`
+	Commit          string         `json:"commit,omitempty"`
+	Event           string         `json:"event,omitempty"`
+	Branch          string         `json:"branch,omitempty"`
+	Ref             string         `json:"ref,omitempty"`
+	HTMLLink        string         `json:"htmlLink,omitempty"`
+	Title           string         `json:"title,omitempty"`
+	Message         string         `json:"message,omitempty"`
+	Author          string         `json:"author,omitempty"`
+	AvatarURL       string         `json:"avatarUrl,omitempty"`
+	Email           string         `json:"email,omitempty"`
+	//Author: Zac +
+	RunCallbackScript bool `json:"runCallbackScript,omitempty"`
+	//Author: Zac -
 }
 
 type PipelineExecutionStatus struct {
@@ -379,8 +389,10 @@ type RepoPerm struct {
 }
 
 type RunPipelineInput struct {
-	Branch            string `json:"branch,omitempty"`
-	RunCallbackScript bool   `json:"runCallbackScript,omitempty"`
+	Branch string `json:"branch,omitempty"`
+	//Author: Zac +
+	RunCallbackScript bool `json:"runCallbackScript,omitempty"`
+	//Author: Zac -
 }
 
 type AuthAppInput struct {

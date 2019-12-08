@@ -82,6 +82,7 @@ type Interface interface {
 	RKEK8sSystemImagesGetter
 	RKEK8sServiceOptionsGetter
 	RKEAddonsGetter
+	ClusterSettingsGetter
 }
 
 type Clients struct {
@@ -149,6 +150,7 @@ type Clients struct {
 	RKEK8sSystemImage                       RKEK8sSystemImageClient
 	RKEK8sServiceOption                     RKEK8sServiceOptionClient
 	RKEAddon                                RKEAddonClient
+	ClusterSetting                          ClusterSettingClient
 }
 
 type Client struct {
@@ -218,6 +220,7 @@ type Client struct {
 	rkeK8sSystemImageControllers                       map[string]RKEK8sSystemImageController
 	rkeK8sServiceOptionControllers                     map[string]RKEK8sServiceOptionController
 	rkeAddonControllers                                map[string]RKEAddonController
+	clusterSettingControllers                          map[string]ClusterSettingController
 }
 
 func Factory(ctx context.Context, config rest.Config) (context.Context, controller.Starter, error) {
@@ -439,6 +442,9 @@ func NewClientsFromInterface(iface Interface) *Clients {
 		RKEAddon: &rkeAddonClient2{
 			iface: iface.RKEAddons(""),
 		},
+		ClusterSetting: &clusterSettingClient2{
+			iface: iface.ClusterSettings(""),
+		},
 	}
 }
 
@@ -517,6 +523,7 @@ func NewForConfig(config rest.Config) (Interface, error) {
 		rkeK8sSystemImageControllers:                       map[string]RKEK8sSystemImageController{},
 		rkeK8sServiceOptionControllers:                     map[string]RKEK8sServiceOptionController{},
 		rkeAddonControllers:                                map[string]RKEAddonController{},
+		clusterSettingControllers:                          map[string]ClusterSettingController{},
 	}, nil
 }
 
@@ -1332,6 +1339,19 @@ type RKEAddonsGetter interface {
 func (c *Client) RKEAddons(namespace string) RKEAddonInterface {
 	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &RKEAddonResource, RKEAddonGroupVersionKind, rkeAddonFactory{})
 	return &rkeAddonClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type ClusterSettingsGetter interface {
+	ClusterSettings(namespace string) ClusterSettingInterface
+}
+
+func (c *Client) ClusterSettings(namespace string) ClusterSettingInterface {
+	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &ClusterSettingResource, ClusterSettingGroupVersionKind, clusterSettingFactory{})
+	return &clusterSettingClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,
