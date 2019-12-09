@@ -32,6 +32,7 @@ const (
 	PipelineExecutionFieldRepositoryURL        = "repositoryUrl"
 	PipelineExecutionFieldRun                  = "run"
 	PipelineExecutionFieldRunCallbackScript    = "runCallbackScript"
+	PipelineExecutionFieldRunCodeScanner       = "runCodeScanner"
 	PipelineExecutionFieldStages               = "stages"
 	PipelineExecutionFieldStarted              = "started"
 	PipelineExecutionFieldState                = "state"
@@ -71,6 +72,7 @@ type PipelineExecution struct {
 	RepositoryURL        string              `json:"repositoryUrl,omitempty" yaml:"repositoryUrl,omitempty"`
 	Run                  int64               `json:"run,omitempty" yaml:"run,omitempty"`
 	RunCallbackScript    bool                `json:"runCallbackScript,omitempty" yaml:"runCallbackScript,omitempty"`
+	RunCodeScanner       bool                `json:"runCodeScanner,omitempty" yaml:"runCodeScanner,omitempty"`
 	Stages               []StageStatus       `json:"stages,omitempty" yaml:"stages,omitempty"`
 	Started              string              `json:"started,omitempty" yaml:"started,omitempty"`
 	State                string              `json:"state,omitempty" yaml:"state,omitempty"`

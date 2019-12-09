@@ -23,6 +23,7 @@ type PipelineSetting struct {
 	NodeSelector     string           `json:"nodeSelector"`
 	LocalShare       string           `json:"localShare"`
 	CallbackScripts  []CallbackScript `json:"callbackScripts"`
+	SonarScanner     *SonarScanner    `json:"sonarScanner"`
 }
 
 type WorkloadSetting struct {
@@ -31,4 +32,10 @@ type WorkloadSetting struct {
 type CallbackScript struct {
 	Label string `json:"label"`
 	Value string `json:"value"`
+}
+
+type SonarScanner struct {
+	Login          string `json:"login"`
+	SourceEncoding string `json:"sourceEncoding"`
+	HostUrl        string `json:"hostUrl"`
 }

@@ -8,6 +8,7 @@ const (
 	PipelineSettingFieldNodeSelector     = "nodeSelector"
 	PipelineSettingFieldNodeToleration   = "nodeToleration"
 	PipelineSettingFieldRegistryInsecure = "registryInsecure"
+	PipelineSettingFieldSonarScanner     = "sonarScanner"
 )
 
 type PipelineSetting struct {
@@ -17,4 +18,5 @@ type PipelineSetting struct {
 	NodeSelector     string           `json:"nodeSelector,omitempty" yaml:"nodeSelector,omitempty"`
 	NodeToleration   string           `json:"nodeToleration,omitempty" yaml:"nodeToleration,omitempty"`
 	RegistryInsecure bool             `json:"registryInsecure,omitempty" yaml:"registryInsecure,omitempty"`
+	SonarScanner     *SonarScanner    `json:"sonarScanner,omitempty" yaml:"sonarScanner,omitempty"`
 }

@@ -17,6 +17,7 @@ const (
 	PipelineExecutionSpecFieldRepositoryURL     = "repositoryUrl"
 	PipelineExecutionSpecFieldRun               = "run"
 	PipelineExecutionSpecFieldRunCallbackScript = "runCallbackScript"
+	PipelineExecutionSpecFieldRunCodeScanner    = "runCodeScanner"
 	PipelineExecutionSpecFieldTitle             = "title"
 	PipelineExecutionSpecFieldTriggerUserID     = "triggerUserId"
 	PipelineExecutionSpecFieldTriggeredBy       = "triggeredBy"
@@ -38,6 +39,7 @@ type PipelineExecutionSpec struct {
 	RepositoryURL     string          `json:"repositoryUrl,omitempty" yaml:"repositoryUrl,omitempty"`
 	Run               int64           `json:"run,omitempty" yaml:"run,omitempty"`
 	RunCallbackScript bool            `json:"runCallbackScript,omitempty" yaml:"runCallbackScript,omitempty"`
+	RunCodeScanner    bool            `json:"runCodeScanner,omitempty" yaml:"runCodeScanner,omitempty"`
 	Title             string          `json:"title,omitempty" yaml:"title,omitempty"`
 	TriggerUserID     string          `json:"triggerUserId,omitempty" yaml:"triggerUserId,omitempty"`
 	TriggeredBy       string          `json:"triggeredBy,omitempty" yaml:"triggeredBy,omitempty"`

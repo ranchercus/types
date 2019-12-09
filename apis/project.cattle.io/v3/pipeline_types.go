@@ -232,9 +232,6 @@ type Step struct {
 	ApplyYamlConfig      *ApplyYamlConfig      `json:"applyYamlConfig,omitempty" yaml:"applyYamlConfig,omitempty"`
 	PublishCatalogConfig *PublishCatalogConfig `json:"publishCatalogConfig,omitempty" yaml:"publishCatalogConfig,omitempty"`
 	ApplyAppConfig       *ApplyAppConfig       `json:"applyAppConfig,omitempty" yaml:"applyAppConfig,omitempty"`
-	//Author: Zac +
-	SonarqubeConfig       *SonarqubeConfig       `json:"sonarqubeConfig,omitempty" yaml:"sonarqubeConfig,omitempty"`
-	//Author: Zac -
 
 	Env           map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
 	EnvFrom       []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
@@ -306,18 +303,6 @@ type ApplyAppConfig struct {
 	TargetNamespace string            `json:"targetNamespace,omitempty" yaml:"targetNamespace,omitempty"`
 }
 
-//Author: Zac +
-type SonarqubeConfig struct {
-	ProjectKey      string            `json:"projectKey,omitempty" yaml:"projectKey,omitempty"`
-	ProjectName     string            `json:"projectName,omitempty" yaml:"projectName,omitempty"`
-	ProjectVersion  string            `json:"projectVersion,omitempty" yaml:"projectVersion,omitempty"`
-	Sources         string            `json:"sources,omitempty" yaml:"sources,omitempty"`
-	ProjectBaseDir  string            `json:"projectBaseDir,omitempty" yaml:"projectBaseDir,omitempty"`
-	Language        string            `json:"language,omitempty" yaml:"language,omitempty"`
-	SourceEncoding  string            `json:"sourceEncoding,omitempty" yaml:"sourceEncoding,omitempty"`
-}
-//Author: Zac -
-
 type PipelineExecutionSpec struct {
 	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
 
@@ -339,6 +324,7 @@ type PipelineExecutionSpec struct {
 	Email           string         `json:"email,omitempty"`
 	//Author: Zac +
 	RunCallbackScript bool `json:"runCallbackScript,omitempty"`
+	RunCodeScanner    bool `json:"runCodeScanner,omitempty"`
 	//Author: Zac -
 }
 
@@ -407,6 +393,7 @@ type RunPipelineInput struct {
 	Branch string `json:"branch,omitempty"`
 	//Author: Zac +
 	RunCallbackScript bool `json:"runCallbackScript,omitempty"`
+	RunCodeScanner    bool `json:"runCodeScanner,omitempty"`
 	//Author: Zac -
 }
 
