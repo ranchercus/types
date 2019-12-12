@@ -68,7 +68,10 @@ func rkeTypes(schemas *types.Schemas) *types.Schemas {
 				"key",
 			}},
 			m.ReadOnly{Field: "timeAdded"},
-		)
+		).
+		MustImport(&Version, v3.ExtraEnv{}).
+		MustImport(&Version, v3.ExtraVolume{}).
+		MustImport(&Version, v3.ExtraVolumeMount{})
 }
 
 func schemaTypes(schemas *types.Schemas) *types.Schemas {
@@ -218,6 +221,7 @@ func clusterTypes(schemas *types.Schemas) *types.Schemas {
 		MustImport(&Version, v3.MonitoringOutput{}).
 		MustImport(&Version, v3.RestoreFromEtcdBackupInput{}).
 		MustImport(&Version, v3.SaveAsTemplateInput{}).
+		MustImport(&Version, v3.SaveAsTemplateOutput{}).
 		MustImportAndCustomize(&Version, v3.ETCDService{}, func(schema *types.Schema) {
 			schema.MustCustomizeField("extraArgs", func(field types.Field) types.Field {
 				field.Default = map[string]interface{}{
@@ -263,7 +267,8 @@ func clusterTypes(schemas *types.Schemas) *types.Schemas {
 			}
 			schema.ResourceActions[v3.ClusterActionRunCISScan] = types.Action{}
 			schema.ResourceActions[v3.ClusterActionSaveAsTemplate] = types.Action{
-				Input: "saveAsTemplateInput",
+				Input:  "saveAsTemplateInput",
+				Output: "saveAsTemplateOutput",
 			}
 		})
 }

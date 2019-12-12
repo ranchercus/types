@@ -400,6 +400,24 @@ type IngressConfig struct {
 	ExtraArgs map[string]string `yaml:"extra_args" json:"extraArgs,omitempty"`
 	// DNS Policy
 	DNSPolicy string `yaml:"dns_policy" json:"dnsPolicy,omitempty"`
+	// Extra Env vars
+	ExtraEnvs []ExtraEnv `yaml:"extra_envs" json:"extraEnvs,omitempty" norman:"type=array[json]"`
+	// Extra volumes
+	ExtraVolumes []ExtraVolume `yaml:"extra_volumes" json:"extraVolumes,omitempty" norman:"type=array[json]"`
+	// Extra volume mounts
+	ExtraVolumeMounts []ExtraVolumeMount `yaml:"extra_volume_mounts" json:"extraVolumeMounts,omitempty" norman:"type=array[json]"`
+}
+
+type ExtraEnv struct {
+	v1.EnvVar
+}
+
+type ExtraVolume struct {
+	v1.Volume
+}
+
+type ExtraVolumeMount struct {
+	v1.VolumeMount
 }
 
 type RKEPlan struct {
@@ -507,6 +525,8 @@ type WeaveNetworkProvider struct {
 }
 
 type KubernetesServicesOptions struct {
+	// Additional options passed to Etcd
+	Etcd map[string]string `json:"etcd"`
 	// Additional options passed to KubeAPI
 	KubeAPI map[string]string `json:"kubeapi"`
 	// Additional options passed to Kubelet
