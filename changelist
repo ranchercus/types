@@ -1,0 +1,4 @@
+apis/project.cattle.io/v3/pipeline_types.go
+apis/management.cattle.io/v3/cluster_setting_types.go
+apis/management.cattle.io/v3/schema/schema.go
+apis/project.cattle.io/v3/schema/schema.go
