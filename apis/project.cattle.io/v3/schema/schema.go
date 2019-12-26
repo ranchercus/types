@@ -826,6 +826,9 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		MustImport(&Version, v3.AuthUserInput{}).
 		MustImport(&Version, v3.RunPipelineInput{}).
 		MustImport(&Version, v3.PushPipelineConfigInput{}).
+		// Author: Zac +
+		MustImport(&Version, v3.SubPipelineInput{}).
+		// Author: Zac -
 		MustImport(&Version, v3.GithubApplyInput{}).
 		MustImport(&Version, v3.GitlabApplyInput{}).
 		MustImport(&Version, v3.BitbucketCloudApplyInput{}).
@@ -914,6 +917,9 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 				"pushconfig": {
 					Input: "pushPipelineConfigInput",
 				},
+				"sub": { // Author: Zac +
+					Input: "subPipelineInput",
+				}, // Author: Zac -
 			}
 		}).
 		MustImportAndCustomize(&Version, v3.PipelineExecution{}, func(schema *types.Schema) {

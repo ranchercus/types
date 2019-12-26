@@ -7,6 +7,7 @@ import (
 const (
 	PipelineType                        = "pipeline"
 	PipelineFieldAnnotations            = "annotations"
+	PipelineFieldContextPath            = "contextPath"
 	PipelineFieldCreated                = "created"
 	PipelineFieldCreatorID              = "creatorId"
 	PipelineFieldLabels                 = "labels"
@@ -25,6 +26,7 @@ const (
 	PipelineFieldSourceCodeCredential   = "sourceCodeCredential"
 	PipelineFieldSourceCodeCredentialID = "sourceCodeCredentialId"
 	PipelineFieldState                  = "state"
+	PipelineFieldSubPath                = "subPath"
 	PipelineFieldToken                  = "token"
 	PipelineFieldTransitioning          = "transitioning"
 	PipelineFieldTransitioningMessage   = "transitioningMessage"
@@ -38,6 +40,7 @@ const (
 type Pipeline struct {
 	types.Resource
 	Annotations            map[string]string     `json:"annotations,omitempty" yaml:"annotations,omitempty"`
+	ContextPath            string                `json:"contextPath,omitempty" yaml:"contextPath,omitempty"`
 	Created                string                `json:"created,omitempty" yaml:"created,omitempty"`
 	CreatorID              string                `json:"creatorId,omitempty" yaml:"creatorId,omitempty"`
 	Labels                 map[string]string     `json:"labels,omitempty" yaml:"labels,omitempty"`
@@ -56,6 +59,7 @@ type Pipeline struct {
 	SourceCodeCredential   *SourceCodeCredential `json:"sourceCodeCredential,omitempty" yaml:"sourceCodeCredential,omitempty"`
 	SourceCodeCredentialID string                `json:"sourceCodeCredentialId,omitempty" yaml:"sourceCodeCredentialId,omitempty"`
 	State                  string                `json:"state,omitempty" yaml:"state,omitempty"`
+	SubPath                string                `json:"subPath,omitempty" yaml:"subPath,omitempty"`
 	Token                  string                `json:"token,omitempty" yaml:"token,omitempty"`
 	Transitioning          string                `json:"transitioning,omitempty" yaml:"transitioning,omitempty"`
 	TransitioningMessage   string                `json:"transitioningMessage,omitempty" yaml:"transitioningMessage,omitempty"`
@@ -91,6 +95,8 @@ type PipelineOperations interface {
 	ActionPushconfig(resource *Pipeline, input *PushPipelineConfigInput) error
 
 	ActionRun(resource *Pipeline, input *RunPipelineInput) error
+
+	ActionSub(resource *Pipeline, input *SubPipelineInput) error
 }
 
 func newPipelineClient(apiClient *Client) *PipelineClient {
@@ -161,5 +167,10 @@ func (c *PipelineClient) ActionPushconfig(resource *Pipeline, input *PushPipelin
 
 func (c *PipelineClient) ActionRun(resource *Pipeline, input *RunPipelineInput) error {
 	err := c.apiClient.Ops.DoAction(PipelineType, "run", &resource.Resource, input, nil)
+	return err
+}
+
+func (c *PipelineClient) ActionSub(resource *Pipeline, input *SubPipelineInput) error {
+	err := c.apiClient.Ops.DoAction(PipelineType, "sub", &resource.Resource, input, nil)
 	return err
 }

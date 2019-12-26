@@ -10,6 +10,7 @@ const (
 	PipelineExecutionFieldAuthor               = "author"
 	PipelineExecutionFieldAvatarURL            = "avatarUrl"
 	PipelineExecutionFieldBranch               = "branch"
+	PipelineExecutionFieldBuildCxtPath         = "buildCxtPath"
 	PipelineExecutionFieldCommit               = "commit"
 	PipelineExecutionFieldConditions           = "conditions"
 	PipelineExecutionFieldCreated              = "created"
@@ -50,6 +51,7 @@ type PipelineExecution struct {
 	Author               string              `json:"author,omitempty" yaml:"author,omitempty"`
 	AvatarURL            string              `json:"avatarUrl,omitempty" yaml:"avatarUrl,omitempty"`
 	Branch               string              `json:"branch,omitempty" yaml:"branch,omitempty"`
+	BuildCxtPath         string              `json:"buildCxtPath,omitempty" yaml:"buildCxtPath,omitempty"`
 	Commit               string              `json:"commit,omitempty" yaml:"commit,omitempty"`
 	Conditions           []PipelineCondition `json:"conditions,omitempty" yaml:"conditions,omitempty"`
 	Created              string              `json:"created,omitempty" yaml:"created,omitempty"`

@@ -5,6 +5,7 @@ const (
 	PipelineExecutionSpecFieldAuthor            = "author"
 	PipelineExecutionSpecFieldAvatarURL         = "avatarUrl"
 	PipelineExecutionSpecFieldBranch            = "branch"
+	PipelineExecutionSpecFieldBuildCxtPath      = "buildCxtPath"
 	PipelineExecutionSpecFieldCommit            = "commit"
 	PipelineExecutionSpecFieldEmail             = "email"
 	PipelineExecutionSpecFieldEvent             = "event"
@@ -27,6 +28,7 @@ type PipelineExecutionSpec struct {
 	Author            string          `json:"author,omitempty" yaml:"author,omitempty"`
 	AvatarURL         string          `json:"avatarUrl,omitempty" yaml:"avatarUrl,omitempty"`
 	Branch            string          `json:"branch,omitempty" yaml:"branch,omitempty"`
+	BuildCxtPath      string          `json:"buildCxtPath,omitempty" yaml:"buildCxtPath,omitempty"`
 	Commit            string          `json:"commit,omitempty" yaml:"commit,omitempty"`
 	Email             string          `json:"email,omitempty" yaml:"email,omitempty"`
 	Event             string          `json:"event,omitempty" yaml:"event,omitempty"`

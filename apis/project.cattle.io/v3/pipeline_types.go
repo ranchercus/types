@@ -182,6 +182,10 @@ type PipelineSpec struct {
 
 	RepositoryURL            string `json:"repositoryUrl,omitempty" yaml:"repositoryUrl,omitempty"`
 	SourceCodeCredentialName string `json:"sourceCodeCredentialName,omitempty" yaml:"sourceCodeCredentialName,omitempty" norman:"type=reference[sourceCodeCredential],noupdate"`
+	//Author: Zac +
+	SubPath     string `json:"subPath,omitempty" yaml:"subPath,omitempty"`
+	ContextPath string `json:"contextPath,omitempty" yaml:"contextPath,omitempty"`
+	//Author: Zac -
 }
 
 type PipelineConfig struct {
@@ -323,8 +327,9 @@ type PipelineExecutionSpec struct {
 	AvatarURL       string         `json:"avatarUrl,omitempty"`
 	Email           string         `json:"email,omitempty"`
 	//Author: Zac +
-	RunCallbackScript bool `json:"runCallbackScript,omitempty"`
-	RunCodeScanner    bool `json:"runCodeScanner,omitempty"`
+	RunCallbackScript bool   `json:"runCallbackScript,omitempty"`
+	RunCodeScanner    bool   `json:"runCodeScanner,omitempty"`
+	BuildCxtPath      string `json:"buildCxtPath,omitempty"`
 	//Author: Zac -
 }
 
@@ -388,6 +393,14 @@ type RepoPerm struct {
 	Push  bool `json:"push,omitempty"`
 	Admin bool `json:"admin,omitempty"`
 }
+
+// Author: Zac +
+type SubPipelineInput struct {
+	SubPath     string `json:"subPath,omitempty"`
+	ContextPath string `json:"contextPath,omitempty"`
+}
+
+// Author: Zac -
 
 type RunPipelineInput struct {
 	Branch string `json:"branch,omitempty"`
