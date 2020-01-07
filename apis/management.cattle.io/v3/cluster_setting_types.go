@@ -17,21 +17,23 @@ type ClusterSettingSpec struct {
 }
 
 type PipelineSetting struct {
-	RegistryInsecure bool             `json:"registryInsecure"`
-	DefaultRegistry  string           `json:"defaultRegistry"`
-	NodeToleration   string           `json:"nodeToleration"`
-	NodeSelector     string           `json:"nodeSelector"`
-	LocalShare       string           `json:"localShare"`
-	CallbackScripts  []CallbackScript `json:"callbackScripts"`
-	SonarScanner     *SonarScanner    `json:"sonarScanner"`
+	RegistryInsecure    bool             `json:"registryInsecure"`
+	DefaultRegistry     string           `json:"defaultRegistry"`
+	NodeToleration      string           `json:"nodeToleration"`
+	NodeSelector        string           `json:"nodeSelector"`
+	LocalShare          string           `json:"localShare"`
+	EnableLocalRegistry bool             `json:"enableLocalRegistry"`
+	CallbackScripts     []CallbackScript `json:"callbackScripts"`
+	SonarScanner        *SonarScanner    `json:"sonarScanner"`
 }
 
 type WorkloadSetting struct {
 }
 
 type CallbackScript struct {
-	Label string `json:"label"`
-	Value string `json:"value"`
+	Label  string `json:"label"`
+	Value  string `json:"value"`
+	Script string `json:"script"`
 }
 
 type SonarScanner struct {
