@@ -159,6 +159,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&RKEAddonList{},
 		&ClusterSetting{},
 		&ClusterSettingList{},
+		&PipelineTemplate{},
+		&PipelineTemplateList{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

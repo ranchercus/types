@@ -48,7 +48,10 @@ var (
 		Init(clusterTemplateTypes).
 		Init(driverMetadataTypes).
 		Init(encryptionTypes).
-		Init(clusterSettingTypes)
+		//Author: Zac+
+		Init(clusterSettingTypes).
+		Init(pipelineTypes)
+		//Author: Zac-
 
 	TokenSchemas = factory.Schemas(&Version).
 			Init(tokens)
@@ -923,6 +926,19 @@ func encryptionTypes(schemas *types.Schemas) *types.Schemas {
 	}{})
 }
 
+//Author: Zac+
 func clusterSettingTypes(schemas *types.Schemas) *types.Schemas {
 	return schemas.MustImport(&Version, v3.ClusterSetting{})
 }
+
+func pipelineTypes(schemas *types.Schemas) *types.Schemas {
+	return schemas.AddMapperForType(&Version, v3.PipelineTemplate{}, m.DisplayName{}).
+		MustImportAndCustomize(&Version, v3.PipelineTemplate{}, func(schema *types.Schema) {
+			schema.MustCustomizeField("template", func(f types.Field) types.Field {
+				f.Required = true
+				return f
+			})
+		})
+}
+
+//Author: Zac-

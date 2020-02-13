@@ -70,6 +70,7 @@ type Client struct {
 	RKEK8sServiceOption                     RKEK8sServiceOptionOperations
 	RKEAddon                                RKEAddonOperations
 	ClusterSetting                          ClusterSettingOperations
+	PipelineTemplate                        PipelineTemplateOperations
 }
 
 func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
@@ -145,6 +146,7 @@ func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
 	client.RKEK8sServiceOption = newRKEK8sServiceOptionClient(client)
 	client.RKEAddon = newRKEAddonClient(client)
 	client.ClusterSetting = newClusterSettingClient(client)
+	client.PipelineTemplate = newPipelineTemplateClient(client)
 
 	return client, nil
 }

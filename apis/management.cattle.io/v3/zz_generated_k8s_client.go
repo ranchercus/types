@@ -83,6 +83,7 @@ type Interface interface {
 	RKEK8sServiceOptionsGetter
 	RKEAddonsGetter
 	ClusterSettingsGetter
+	PipelineTemplatesGetter
 }
 
 type Clients struct {
@@ -151,6 +152,7 @@ type Clients struct {
 	RKEK8sServiceOption                     RKEK8sServiceOptionClient
 	RKEAddon                                RKEAddonClient
 	ClusterSetting                          ClusterSettingClient
+	PipelineTemplate                        PipelineTemplateClient
 }
 
 type Client struct {
@@ -221,6 +223,7 @@ type Client struct {
 	rkeK8sServiceOptionControllers                     map[string]RKEK8sServiceOptionController
 	rkeAddonControllers                                map[string]RKEAddonController
 	clusterSettingControllers                          map[string]ClusterSettingController
+	pipelineTemplateControllers                        map[string]PipelineTemplateController
 }
 
 func Factory(ctx context.Context, config rest.Config) (context.Context, controller.Starter, error) {
@@ -445,6 +448,9 @@ func NewClientsFromInterface(iface Interface) *Clients {
 		ClusterSetting: &clusterSettingClient2{
 			iface: iface.ClusterSettings(""),
 		},
+		PipelineTemplate: &pipelineTemplateClient2{
+			iface: iface.PipelineTemplates(""),
+		},
 	}
 }
 
@@ -524,6 +530,7 @@ func NewForConfig(config rest.Config) (Interface, error) {
 		rkeK8sServiceOptionControllers:                     map[string]RKEK8sServiceOptionController{},
 		rkeAddonControllers:                                map[string]RKEAddonController{},
 		clusterSettingControllers:                          map[string]ClusterSettingController{},
+		pipelineTemplateControllers:                        map[string]PipelineTemplateController{},
 	}, nil
 }
 
@@ -1352,6 +1359,19 @@ type ClusterSettingsGetter interface {
 func (c *Client) ClusterSettings(namespace string) ClusterSettingInterface {
 	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &ClusterSettingResource, ClusterSettingGroupVersionKind, clusterSettingFactory{})
 	return &clusterSettingClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type PipelineTemplatesGetter interface {
+	PipelineTemplates(namespace string) PipelineTemplateInterface
+}
+
+func (c *Client) PipelineTemplates(namespace string) PipelineTemplateInterface {
+	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &PipelineTemplateResource, PipelineTemplateGroupVersionKind, pipelineTemplateFactory{})
+	return &pipelineTemplateClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,

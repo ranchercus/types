@@ -68,6 +68,7 @@ type Config struct {
 	RKEK8sServiceOptions                     map[string]managementClient.RKEK8sServiceOption                     `json:"rkeK8sServiceOptions,omitempty" yaml:"rkeK8sServiceOptions,omitempty"`
 	RKEAddons                                map[string]managementClient.RKEAddon                                `json:"rkeAddons,omitempty" yaml:"rkeAddons,omitempty"`
 	ClusterSettings                          map[string]managementClient.ClusterSetting                          `json:"clusterSettings,omitempty" yaml:"clusterSettings,omitempty"`
+	PipelineTemplates                        map[string]managementClient.PipelineTemplate                        `json:"pipelineTemplates,omitempty" yaml:"pipelineTemplates,omitempty"`
 
 	// Cluster Client
 	Namespaces        map[string]clusterClient.Namespace        `json:"namespaces,omitempty" yaml:"namespaces,omitempty"`
