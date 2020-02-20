@@ -194,6 +194,10 @@ type PipelineConfig struct {
 	Timeout      int                   `json:"timeout,omitempty" yaml:"timeout,omitempty"`
 	Branch       *Constraint           `json:"branch,omitempty" yaml:"branch,omitempty"`
 	Notification *PipelineNotification `json:"notification,omitempty" yaml:"notification,omitempty"`
+
+	//Author: Zac+
+	Env map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
+	//Author: Zac-
 }
 
 type PipelineNotification struct {

@@ -1352,6 +1352,13 @@ func (in *PipelineConfig) DeepCopyInto(out *PipelineConfig) {
 		*out = new(PipelineNotification)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Env != nil {
+		in, out := &in.Env, &out.Env
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	return
 }
 
