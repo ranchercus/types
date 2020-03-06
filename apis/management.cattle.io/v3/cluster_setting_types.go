@@ -14,6 +14,7 @@ type ClusterSetting struct {
 type ClusterSettingSpec struct {
 	PipelineSetting PipelineSetting `json:"pipelineSetting"`
 	WorkloadSetting WorkloadSetting `json:"workloadSetting"`
+	RegistrySetting RegistrySetting `json:"registrySetting"`
 }
 
 type PipelineSetting struct {
@@ -40,4 +41,10 @@ type SonarScanner struct {
 	Login          string `json:"login"`
 	SourceEncoding string `json:"sourceEncoding"`
 	HostUrl        string `json:"hostUrl"`
+}
+
+type RegistrySetting struct {
+	Host     string `json:"host"`
+	Insecure bool   `json:"insecure"`
+	Cert     string `json:"cert"`
 }

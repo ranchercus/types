@@ -36,6 +36,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 
 		&ClusterAuthToken{},
 		&ClusterUserAttribute{},
+		&HarborProject{},
+		&HarborProjectList{},
+		&HarborRepository{},
+		&HarborRepositoryList{},
+		&HarborTag{},
+		&HarborTagList{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

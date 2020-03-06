@@ -75,6 +75,9 @@ type Config struct {
 	PersistentVolumes map[string]clusterClient.PersistentVolume `json:"persistentVolumes,omitempty" yaml:"persistentVolumes,omitempty"`
 	StorageClasss     map[string]clusterClient.StorageClass     `json:"storageClasses,omitempty" yaml:"storageClasses,omitempty"`
 	APIServices       map[string]clusterClient.APIService       `json:"apiServices,omitempty" yaml:"apiServices,omitempty"`
+	HarborProjects    map[string]clusterClient.HarborProject    `json:"harborProjects,omitempty" yaml:"harborProjects,omitempty"`
+	HarborRepositorys map[string]clusterClient.HarborRepository `json:"harborRepositories,omitempty" yaml:"harborRepositories,omitempty"`
+	HarborTags        map[string]clusterClient.HarborTag        `json:"harborTags,omitempty" yaml:"harborTags,omitempty"`
 
 	// Project Client
 	PersistentVolumeClaims         map[string]projectClient.PersistentVolumeClaim         `json:"persistentVolumeClaims,omitempty" yaml:"persistentVolumeClaims,omitempty"`

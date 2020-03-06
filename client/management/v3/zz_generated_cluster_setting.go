@@ -13,6 +13,7 @@ const (
 	ClusterSettingFieldName            = "name"
 	ClusterSettingFieldOwnerReferences = "ownerReferences"
 	ClusterSettingFieldPipelineSetting = "pipelineSetting"
+	ClusterSettingFieldRegistrySetting = "registrySetting"
 	ClusterSettingFieldRemoved         = "removed"
 	ClusterSettingFieldUUID            = "uuid"
 	ClusterSettingFieldWorkloadSetting = "workloadSetting"
@@ -27,6 +28,7 @@ type ClusterSetting struct {
 	Name            string            `json:"name,omitempty" yaml:"name,omitempty"`
 	OwnerReferences []OwnerReference  `json:"ownerReferences,omitempty" yaml:"ownerReferences,omitempty"`
 	PipelineSetting *PipelineSetting  `json:"pipelineSetting,omitempty" yaml:"pipelineSetting,omitempty"`
+	RegistrySetting *RegistrySetting  `json:"registrySetting,omitempty" yaml:"registrySetting,omitempty"`
 	Removed         string            `json:"removed,omitempty" yaml:"removed,omitempty"`
 	UUID            string            `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	WorkloadSetting *WorkloadSetting  `json:"workloadSetting,omitempty" yaml:"workloadSetting,omitempty"`

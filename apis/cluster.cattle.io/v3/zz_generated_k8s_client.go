@@ -22,6 +22,9 @@ type Interface interface {
 
 	ClusterAuthTokensGetter
 	ClusterUserAttributesGetter
+	HarborProjectsGetter
+	HarborRepositoriesGetter
+	HarborTagsGetter
 }
 
 type Clients struct {
@@ -29,6 +32,9 @@ type Clients struct {
 
 	ClusterAuthToken     ClusterAuthTokenClient
 	ClusterUserAttribute ClusterUserAttributeClient
+	HarborProject        HarborProjectClient
+	HarborRepository     HarborRepositoryClient
+	HarborTag            HarborTagClient
 }
 
 type Client struct {
@@ -38,6 +44,9 @@ type Client struct {
 
 	clusterAuthTokenControllers     map[string]ClusterAuthTokenController
 	clusterUserAttributeControllers map[string]ClusterUserAttributeController
+	harborProjectControllers        map[string]HarborProjectController
+	harborRepositoryControllers     map[string]HarborRepositoryController
+	harborTagControllers            map[string]HarborTagController
 }
 
 func Factory(ctx context.Context, config rest.Config) (context.Context, controller.Starter, error) {
@@ -79,6 +88,15 @@ func NewClientsFromInterface(iface Interface) *Clients {
 		ClusterUserAttribute: &clusterUserAttributeClient2{
 			iface: iface.ClusterUserAttributes(""),
 		},
+		HarborProject: &harborProjectClient2{
+			iface: iface.HarborProjects(""),
+		},
+		HarborRepository: &harborRepositoryClient2{
+			iface: iface.HarborRepositories(""),
+		},
+		HarborTag: &harborTagClient2{
+			iface: iface.HarborTags(""),
+		},
 	}
 }
 
@@ -97,6 +115,9 @@ func NewForConfig(config rest.Config) (Interface, error) {
 
 		clusterAuthTokenControllers:     map[string]ClusterAuthTokenController{},
 		clusterUserAttributeControllers: map[string]ClusterUserAttributeController{},
+		harborProjectControllers:        map[string]HarborProjectController{},
+		harborRepositoryControllers:     map[string]HarborRepositoryController{},
+		harborTagControllers:            map[string]HarborTagController{},
 	}, nil
 }
 
@@ -132,6 +153,45 @@ type ClusterUserAttributesGetter interface {
 func (c *Client) ClusterUserAttributes(namespace string) ClusterUserAttributeInterface {
 	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &ClusterUserAttributeResource, ClusterUserAttributeGroupVersionKind, clusterUserAttributeFactory{})
 	return &clusterUserAttributeClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type HarborProjectsGetter interface {
+	HarborProjects(namespace string) HarborProjectInterface
+}
+
+func (c *Client) HarborProjects(namespace string) HarborProjectInterface {
+	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &HarborProjectResource, HarborProjectGroupVersionKind, harborProjectFactory{})
+	return &harborProjectClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type HarborRepositoriesGetter interface {
+	HarborRepositories(namespace string) HarborRepositoryInterface
+}
+
+func (c *Client) HarborRepositories(namespace string) HarborRepositoryInterface {
+	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &HarborRepositoryResource, HarborRepositoryGroupVersionKind, harborRepositoryFactory{})
+	return &harborRepositoryClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type HarborTagsGetter interface {
+	HarborTags(namespace string) HarborTagInterface
+}
+
+func (c *Client) HarborTags(namespace string) HarborTagInterface {
+	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &HarborTagResource, HarborTagGroupVersionKind, harborTagFactory{})
+	return &harborTagClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,

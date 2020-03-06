@@ -27,7 +27,10 @@ var (
 		Init(persistentVolumeTypes).
 		Init(storageClassTypes).
 		Init(tokens).
-		Init(apiServiceTypes)
+		Init(apiServiceTypes).
+		//Author: Zac+
+		Init(harborTypes)
+	//Author: Zac-
 )
 
 func namespaceTypes(schemas *types.Schemas) *types.Schemas {
@@ -140,3 +143,12 @@ func apiServiceTypes(Schemas *types.Schemas) *types.Schemas {
 		).
 		MustImport(&Version, apiregistrationv1.APIService{})
 }
+
+//Author: Zac+
+func harborTypes(schemas *types.Schemas) *types.Schemas {
+	return schemas.MustImport(&Version, v3.HarborProject{}).
+		MustImport(&Version, v3.HarborRepository{}).
+		MustImport(&Version, v3.HarborTag{})
+}
+
+//Author: Zac-

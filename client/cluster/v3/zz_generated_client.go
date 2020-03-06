@@ -11,6 +11,9 @@ type Client struct {
 	PersistentVolume PersistentVolumeOperations
 	StorageClass     StorageClassOperations
 	APIService       APIServiceOperations
+	HarborProject    HarborProjectOperations
+	HarborRepository HarborRepositoryOperations
+	HarborTag        HarborTagOperations
 }
 
 func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
@@ -27,6 +30,9 @@ func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
 	client.PersistentVolume = newPersistentVolumeClient(client)
 	client.StorageClass = newStorageClassClient(client)
 	client.APIService = newAPIServiceClient(client)
+	client.HarborProject = newHarborProjectClient(client)
+	client.HarborRepository = newHarborRepositoryClient(client)
+	client.HarborTag = newHarborTagClient(client)
 
 	return client, nil
 }
