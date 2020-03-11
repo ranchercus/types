@@ -14,6 +14,7 @@ type ClusterSetting struct {
 type ClusterSettingSpec struct {
 	PipelineSetting PipelineSetting `json:"pipelineSetting"`
 	WorkloadSetting WorkloadSetting `json:"workloadSetting"`
+	LoggingSetting  LoggingSetting  `json:"loggingSetting"`
 	RegistrySetting RegistrySetting `json:"registrySetting"`
 }
 
@@ -29,6 +30,10 @@ type PipelineSetting struct {
 }
 
 type WorkloadSetting struct {
+}
+
+type LoggingSetting struct {
+	EnforceDeploy bool `json:"enforceDeploy"`
 }
 
 type CallbackScript struct {
